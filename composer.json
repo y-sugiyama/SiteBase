@@ -1,0 +1,11 @@
+{
+    "name": "loginbase-app",
+    "require": {
+        "cakephp/cakephp": "2.8.*",
+        "cakedc/migrations": "~2.4.0",
+        "cakephp/debug_kit": "2.2.*"
+    },
+    "config": {
+        "vendor-dir": "Vendor/"
+    }
+}
