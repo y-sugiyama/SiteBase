@@ -15,7 +15,9 @@
  */
 ?>
 <?php echo $this->fetch('content'); ?>
+<br>
 ---------------------------------------
-署名などの雛形
+Sitebase 問い合わせフォームより送信
+http://localhost:8080/pages/top
 
 This email was sent using the CakePHP Framework, http://cakephp.org.

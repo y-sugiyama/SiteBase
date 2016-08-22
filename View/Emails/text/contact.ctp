@@ -14,15 +14,22 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 ?>
+<!--自分が設定したメールアドレスへ送信するメッセージの内容-->
 
+Sitebase問い合わせフォームへ以下の内容が送信されました｡
+
+<!--問い合わせフォームタイトル-->
 お問い合わせ:
 <?php echo $subject; ?>
- 
+
+<!--問い合わせされた方の名前-->
 名前:
 <?php echo $name; ?>
- 
+
+<!--問い合わせされた方のメールアドレス-->
 メールアドレス:
 <?php echo $email; ?>
  
+<!--問い合わせされた内容-->
 本文:
 <?php echo $body; 

@@ -18,6 +18,8 @@ class ContactController extends AppController {
      public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow();
+        //このアクションではfront.ctpのレイアウトを使います
+        $this->layout = 'front';
     }
     
     public $components = array('Paginator', 'Session',
@@ -43,8 +45,7 @@ class ContactController extends AppController {
     }
 
     public function contact() {
-        echo'check';
-        exit;
+        
         if (!$this->request->is('post') || !$this->request->data) {
             return;
         }
@@ -58,13 +59,16 @@ class ContactController extends AppController {
         }
 
         switch ($this->request->data['confirm']) {
+            
+            //データがvalue:confirmでsubmitされたら
             case 'confirm':
                 $this->render('contact_confirm');
                 break;
+            //データがvalue:sendでsubmitされたら
             case 'send':
                 if ($this->sendContact($this->request->data['Contact'])) {
                     $this->Flash->success('お問い合わせを受け付けました。');
-                    $this->redirect('/');
+                    $this->redirect('/contact/finished');
                 } else {
                     $this->Flash->danger('エラーが発生しました。');
                 }
@@ -82,5 +86,9 @@ class ContactController extends AppController {
                         ->template('contact', 'contact')
                         ->send();
     }
+    
+    public function finished(){
+        
+    } 
 
 }
