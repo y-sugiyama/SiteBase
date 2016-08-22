@@ -90,10 +90,11 @@ class PagesController extends AppController {
     }
 
     public function top() {
-        $this->set(['title' => $title]);
-        $title = 'Loginbase Top';
+//        $this->set(['title' => $title]);
+//        $title = 'Loginbase Top';
     }
-        
+    
+
     
 
 }

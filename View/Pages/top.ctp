@@ -9,8 +9,8 @@ $this->start('topheader');
 <div class="topimage">
     <div class="container">
         <div class="squere">
-            <h1>Loginbase Top</h1>
-            <p class="lead">ログイン機能を実装したwebサイトの基盤となるものです</p>
+            <h1>Sitebase Top</h1>
+            <p class="lead">コーポレートサイトの基盤となるプロジェクトです</p>
         </div>
     </div>
 </div>

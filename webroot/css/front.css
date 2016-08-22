@@ -12,7 +12,7 @@ and open the template in the editor.
 
 .topimage {
     /*webroot/css配下のどこか､という記述になる*/
-      background: url("/img/vege.jpg");
+      background: url("/img/topimage.jpg");
       background-position: center center;
       /*画像を画面に合わせて最小サイズで表示*/
       background-size: contain;
@@ -23,7 +23,7 @@ and open the template in the editor.
     }
     
     .squere{
-        background-color: red;
+        background-color: gold;
         /*透過性*/
         opacity: 0.8;
         padding: 15px 15px;

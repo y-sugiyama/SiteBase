@@ -25,9 +25,9 @@ class AppController extends Controller {
 
     public $components = array(
         'Flash',
-        'Security' => array(
-            'csrfExpires' => '+1 hour'
-        ),
+//        'Security' => array(
+//            'csrfExpires' => '+1 hour'
+//        ),
         'Auth' => Array(
             //ログイン後のリダイレクト先は/users/indexです
             'loginRedirect' => Array('controller' => 'users', 'action' => 'index'),

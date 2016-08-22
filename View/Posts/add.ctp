@@ -41,7 +41,7 @@
                          }
                          ?>">
                          <?php
-                    echo $this->Form->input('textarea', [
+                    echo $this->Form->input('body', [
                         'class' => 'form-control',
                         'placeholder' => 'お知らせ内容'
                     ]);

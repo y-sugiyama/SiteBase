@@ -42,11 +42,11 @@ class CreateUsersTable extends CakeMigration {
                         'null' => false,
                         'default' => null
                     ),
-                    'email' => array(
-                        'type' => 'string',
-                        'null' => false,
-                        'default' => NULL,
-                        'key' => 'index'
+                    'created' => array(
+                        'type' => 'datetime'
+                    ),
+                     'modified' => array(
+                        'type' => 'datetime'
                     ),
                 ),
             ),
@@ -65,11 +65,14 @@ class CreateUsersTable extends CakeMigration {
                         'default' => null
                     ),
                     'body' => array(
-                        'type' => 'string',
+                        'type' => 'text',
                         'null' => false,
                         'default' => null
                     ),
                     'created' => array(
+                        'type' => 'datetime'
+                    ),
+                     'modified' => array(
                         'type' => 'datetime'
                     ),
                 ),

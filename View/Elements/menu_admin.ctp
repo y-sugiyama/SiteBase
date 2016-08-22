@@ -10,7 +10,7 @@
                     <ul class="nav nav-pills nav-stacked">
                         <li><a href="/users/index"><i class="glyphicon glyphicon-pencil"></i> ユーザ</a></li>
 
-                         <li><a href="/posts/index"><i class="glyphicon glyphicon-pencil"></i>お知らせ一覧</a></li>
+                         <li><a href="/posts/index"><i class="glyphicon glyphicon-pencil"></i>お知らせ</a></li>
 
 
 

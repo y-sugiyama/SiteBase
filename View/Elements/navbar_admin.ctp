@@ -13,7 +13,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/users/index">Loginbase管理者画面</a>
+      <a class="navbar-brand" href="/users/index">Sitebase ユーザページ</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

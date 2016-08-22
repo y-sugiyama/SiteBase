@@ -22,7 +22,9 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">ホーム </a></li>
                 <li><a href="/pages/p1">このサイトについて</a></li>
-                <li><a href="/pages/p2">アクセス</a></li>  
+                <li><a href="/pages/p2">アクセス</a></li>
+                <li><a href="/posts/index">お知らせ</a></li>
+                <li><a href="/pages/contact">お問い合せ</a></li>
             </ul>
 
 
