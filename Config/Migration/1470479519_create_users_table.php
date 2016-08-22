@@ -43,14 +43,44 @@ class CreateUsersTable extends CakeMigration {
 						'null'    => false,
 						'default' => null
 					),
+                                        'email' => array(
+                                                'type' => 'string',
+                                                'null' => false,
+                                                'default' => NULL,
+                                                'key' => 'index'
+                                        ),
 				),
 			),
+                    'create_table' => array(
+				'posts'       => array(
+					'id'         => array(
+						'type'      => 'integer',
+						'null'      => false,
+						'default'   => null,
+						'length'    => 36,
+						'key'       => 'primary',
+					),
+					'title' => array(
+						'type'    => 'string',
+						'null'    => false,
+						'default' => null
+					),
+					'body' => array(
+						'type'    => 'string',
+						'null'    => false,
+						'default' => null
+					),
+                                    ),
+                        ),
 		),
 
 		'down'        => array(
 			'drop_table' => array(
 				'users',
-			)
+			),
+                    'drop_table' => array(
+				'posts',
+			),
 		),
 	);
 

@@ -1,5 +1,5 @@
 <?php
-$this->assign('title','Loginbase Top');
+$this->assign('title','Sitebase Top');
 ?>
 
 <!-- Jumbotron -->

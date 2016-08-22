@@ -1,5 +1,5 @@
 <?php
-$this->assign('title','LoginBase アクセス');
+$this->assign('title','SiteBase アクセス');
 ?>
 <!-- Jumbotron -->
 <?php

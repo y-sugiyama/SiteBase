@@ -1,5 +1,5 @@
 <?php
-$this->assign('title','LoginBase このサイトについて');
+$this->assign('title','SiteBase このサイトについて');
 ?>
 <!-- Jumbotron -->
 <?php
