@@ -13,7 +13,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">LoginBase</a>
+            <a class="navbar-brand" href="/">SiteBase</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
