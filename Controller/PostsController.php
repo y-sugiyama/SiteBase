@@ -19,6 +19,23 @@ class PostsController extends AppController {
  */
 	public $components = array('Paginator', 'Session', 'Flash');
 
+        public function beforeFilter() {
+        parent::beforeFilter();
+    }
+
+    public function isAuthorized($user) {
+        // action配列の中に以下のアクションが含まれていたら
+        if (in_array($this->action, ['index', 'view'])) {
+//            trueを返す(roleがadminでもuserでもそのactionにアクセスできる)
+            return true;
+        }
+        //それ以外のactionの場合は､管理者adminだけがアクセスできる
+        if ($user['role'] === 'admin') {
+            return true;
+        }
+
+        return false;
+    }
 /**
  * index method
  *
@@ -49,17 +66,22 @@ class PostsController extends AppController {
  *
  * @return void
  */
-	public function add() {
-		if ($this->request->is('post')) {
-			$this->Post->create();
-			if ($this->Post->save($this->request->data)) {
-				$this->Flash->success(__('The post has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Flash->error(__('The post could not be saved. Please, try again.'));
-			}
-		}
-	}
+	    public function add() {
+        //フォームが送信されたら
+        if ($this->request->is('post')) {
+            //空にして
+            $this->Post->create();
+
+            //正しくデータが保存されたら
+            if ($this->Post->save($this->request->data)) {
+                $this->Flash->success('お知らせが新規追加されました.');
+                return $this->redirect(array('action' => 'index'));
+            } else {
+                //正しくデータが保存されなかったら
+            }
+            $this->Flash->danger('お知らせが正常に保存されませんでした､再度追加をしてください.');
+        }
+    }
 
 /**
  * edit method
