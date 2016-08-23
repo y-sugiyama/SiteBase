@@ -64,11 +64,17 @@ class ContactController extends AppController {
             if ($this->sendContact($contact)) {
                 $this->Flash->success('お問い合わせを受け付けました。');
                 $this->redirect('/contact/finished');
+                //sessionを破棄する
+                $this->Session->delete('Contact');
             } else {
                 $this->Flash->danger('エラーが発生しました。');
             }
         }
         $this->set('contact', $contact);
+        //もしsessionがあればrequest->dataにsetする
+        if(isset($contact)){
+            $this->set($this->request->data[$contact]);
+        }
     }
 
     public function finished() {

@@ -4,7 +4,6 @@ $this->assign('title', 'お問い合せ');
 
 <?php
 echo $this->Form->create('Contact');
-
 ?>
 <div class="form-group <?php
 if ($this->Form->isFieldError('name')) {
@@ -23,10 +22,10 @@ if ($this->Form->isFieldError('name')) {
 
 
 <div class="form-group <?php
-if ($this->Form->isFieldError('email')) {
-    echo 'has-error';
-}
-?>">
+         if ($this->Form->isFieldError('email')) {
+             echo 'has-error';
+         }
+         ?>">
      <?php
          echo $this->Form->input('email', [
              'type' => 'email',
@@ -39,10 +38,10 @@ if ($this->Form->isFieldError('email')) {
 
 
 <div class="form-group <?php
-if ($this->Form->isFieldError('subject')) {
-    echo 'has-error';
-}
-?>">
+         if ($this->Form->isFieldError('subject')) {
+             echo 'has-error';
+         }
+         ?>">
      <?php
          echo $this->Form->input('subject', [
              'type' => 'text',
@@ -54,10 +53,10 @@ if ($this->Form->isFieldError('subject')) {
          ?></div>
 
 <div class="form-group <?php
-if ($this->Form->isFieldError('body')) {
-    echo 'has-error';
-}
-?>">
+         if ($this->Form->isFieldError('body')) {
+             echo 'has-error';
+         }
+         ?>">
      <?php
          echo $this->Form->input('body', [
              'type' => 'textarea',
@@ -68,13 +67,9 @@ if ($this->Form->isFieldError('body')) {
          ]);
          ?></div>
 
-<!--
-<button class="btn btn-lg btn-primary btn-block" type="submit" name= "confirm" value="confirm"><?php echo '確認する'; ?></button>-->
 
 
 <?php
-echo $this->Form->end('submit',[
-//     'type' => 'submit',
-//    'value' =>'confirm',
-]
-        );
+echo $this->Form->end('submit',
+        ['class'=>'btn btn-default']
+);

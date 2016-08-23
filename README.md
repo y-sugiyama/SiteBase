@@ -1,11 +1,10 @@
-# LoginBase
+# SiteBase
 
 ## 概要
-
-ログインを必要とするサイトの為の雛形サイトです。
+コーポレートサイトの雛形サイトです。
 CakePHP 2.8 で作成してます。
 
-![概要](https://raw.githubusercontent.com/y-sugiyama/LoginBase/master/webroot/img/login_base.png)
+![概要](https://raw.githubusercontent.com/y-sugiyama/LoginBase/master/webroot/img/sitebase.png)
 
 ## 要件
 
@@ -15,8 +14,8 @@ CakePHP 2.8 で作成してます。
 ## インストール方法
 
 ```
-$ git clone https://github.com/y-sugiyama/LoginBase.git
-$ cd LoginBase
+$ git clone https://github.com/y-sugiyama/SiteBase.git
+$ cd SiteBase
 $ composer install
 ```
 

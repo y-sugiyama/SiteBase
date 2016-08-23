@@ -18,7 +18,9 @@
  echo $this->Form->postLink('送信'); 
  
  ?>
+<br />
+<?php
 
-再編集 contact/contactへもどる
-もしsessionがあればrequest->dataにsetする
-finished sessionを削除する
+ echo $this->Form->postLink('再編集',['action'=>'contact']); 
+ 
+ ?>
