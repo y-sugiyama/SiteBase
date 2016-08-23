@@ -4,7 +4,7 @@
 コーポレートサイトの雛形サイトです。
 CakePHP 2.8 で作成してます。
 
-![概要](https://raw.githubusercontent.com/y-sugiyama/LoginBase/master/webroot/img/sitebase.png)
+![概要](https://raw.githubusercontent.com/y-sugiyama/SiteBase/master/webroot/img/sitebase.png)
 
 ## 要件
 
