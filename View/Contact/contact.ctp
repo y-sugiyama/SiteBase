@@ -5,24 +5,38 @@ $this->assign('title', 'お問い合せ');
 <?php
 echo $this->Form->create('Contact');
 
-echo $this->Form->input('name', array(
-    'type' => 'text',
-    'label' => 'お名前',
-    'maxlength' => 255,
-    'class' => 'form-control',
-        )
-);
-
-echo $this->Form->input('email', array(
-    'type' => 'email',
-    'label' => 'メールアドレス',
-    'maxlength' => 255,
-    'class' => 'form-control',
-        )
-);
-
-
 ?>
+<div class="form-group <?php
+if ($this->Form->isFieldError('name')) {
+    echo 'has-error';
+}
+?>">
+     <?php
+         echo $this->Form->input('name', [
+             'type' => 'text',
+             'label' => 'お名前',
+             'maxlength' => 255,
+             'class' => 'form-control',
+             'placeholder' => '山田 太郎'
+         ]);
+         ?></div>
+
+
+<div class="form-group <?php
+if ($this->Form->isFieldError('email')) {
+    echo 'has-error';
+}
+?>">
+     <?php
+         echo $this->Form->input('email', [
+             'type' => 'email',
+             'label' => 'メールアドレス',
+             'maxlength' => 255,
+             'class' => 'form-control',
+             'placeholder' => 'aaa@example.com'
+         ]);
+         ?></div>
+
 
 <div class="form-group <?php
 if ($this->Form->isFieldError('subject')) {
@@ -60,8 +74,7 @@ if ($this->Form->isFieldError('body')) {
 
 <?php
 echo $this->Form->end('submit',[
-     'type' => 'submit',
-    'value' =>'confirm',
+//     'type' => 'submit',
+//    'value' =>'confirm',
 ]
         );
-?>

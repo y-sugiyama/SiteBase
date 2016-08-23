@@ -15,20 +15,15 @@ class ContactController extends AppController {
      *
      * @var array
      */
-     public function beforeFilter() {
+    public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow();
         //このアクションではfront.ctpのレイアウトを使います
         $this->layout = 'front';
     }
-    
-    public $components = array('Paginator', 'Session',
 
-      
+    public $components = array('Paginator'
     );
-
-
-    
 
     public function isAuthorized($user) {
         // action配列の中に以下のアクションが含まれていたら
@@ -45,50 +40,57 @@ class ContactController extends AppController {
     }
 
     public function contact() {
-        
-        if (!$this->request->is('post') || !$this->request->data) {
-            return;
-        }
 
-        $this->Contact->set($this->request->data);
+        if ($this->request->is('post')) {
 
-        //フォームから受け取ったデータをバリデーション
-        if (!$this->Contact->validates()) {
+            $this->Contact->set($this->request->data);
+
+            //フォームから受け取ったデータをバリデーション
+            if ($this->Contact->validates()) {
+
+                $this->Session->write('Contact', $this->request->data['Contact']);
+                $this->redirect(array('action' => 'confirm'));
+            }
             $this->Flash->danger('入力内容に不備があります。');
-            return;
         }
+    }
 
-        switch ($this->request->data['confirm']) {
-            
-            //データがvalue:confirmでsubmitされたら
-            case 'confirm':
-                $this->render('contact_confirm');
-                break;
-            //データがvalue:sendでsubmitされたら
-            case 'send':
-                if ($this->sendContact($this->request->data['Contact'])) {
-                    $this->Flash->success('お問い合わせを受け付けました。');
-                    $this->redirect('/contact/finished');
-                } else {
-                    $this->Flash->danger('エラーが発生しました。');
-                }
-                break;
+    public function confirm() {
+
+        $contact = $this->Session->read('Contact');
+
+        if ($this->request->is('post')) {
+            //Sessionを渡す
+            if ($this->sendContact($contact)) {
+                $this->Flash->success('お問い合わせを受け付けました。');
+                $this->redirect('/contact/finished');
+            } else {
+                $this->Flash->danger('エラーが発生しました。');
+            }
         }
+        $this->set('contact', $contact);
+    }
+
+    public function finished() {
+        
     }
 
     private function sendContact($content) {
+        //オートローダがクラスを発見できるよう､場所を伝える
         App::uses('CakeEmail', 'Network/Email');
+        //CakeEmailクラスでnewしてCakeEmailのコンストラクタでcontactを指定して設定をロード
         $email = new CakeEmail('contact');
 
+
+        //CakeEmailは属性の代わりにセッターメソッドを使用する
+        //すべてのセッターメソッドはクラスのインスタンスを返す
         return $email
                         ->from(array($content['email'] => $content['subject']))
+                        //ビューで使う変数をセット
                         ->viewVars($content)
+                        //メール分で以下のテンプレートを使用
                         ->template('contact', 'contact')
                         ->send();
     }
-    
-    public function finished(){
-        
-    } 
 
 }

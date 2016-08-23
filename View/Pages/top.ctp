@@ -1,5 +1,5 @@
 <?php
-$this->assign('title','Sitebase Top');
+$this->assign('title', 'Sitebase Top');
 ?>
 
 <!-- Jumbotron -->
@@ -54,6 +54,35 @@ $this->end();
         </p>
     </div>
 </div>
+
+
+<div class="panel panel-default" id="news">
+    <div class="panel-heading">
+        お知らせ
+    </div>
+    <?php foreach ($posts as $post): ?>
+        <!-- 敢えてbodyを作らないことで、メニューを詰める -->
+        <!-- <div class="panel-body"> -->
+        <ul class="nav nav-pills nav-stacked">
+            <li>
+                <span class="glyphicon glyphicon-pencil"></span>
+                <?php echo $this->Html->link(h($post['Post']['title']), array('controller' => '', 'action' => '')); ?>
+                <?php
+                echo $this->Text->truncate(h($post['Post']['body']), 15, [
+                    'ellipsis' => '...',
+                    'exact' => true,
+                    'html' => true
+                ]);
+                ?>
+            </li> 
+            
+                
+            
+        </ul> 
+    <?php endforeach; ?>
+
+</div>
+
 
 <!-- Site footer -->
 <footer class="footer">

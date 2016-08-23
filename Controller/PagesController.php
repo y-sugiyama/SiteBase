@@ -43,7 +43,7 @@ class PagesController extends AppController {
 
     public function beforeRender() {
         parent::beforeRender();
-        //このアクションではfront.ctpのレイアウトを使います
+//このアクションではfront.ctpのレイアウトを使います
         $this->layout = 'front';
     }
 
@@ -51,32 +51,32 @@ class PagesController extends AppController {
         $path = func_get_args();
 
 
-        //パスの数を数える (スラッシュで区切られた)
+//パスの数を数える (スラッシュで区切られた)
         $count = count($path);
         if (!$count) {
-            //何も書かれてなければrootに飛ぶ
+//何も書かれてなければrootに飛ぶ
             return $this->redirect('/');
         }
-        //変数の初期化
+//変数の初期化
         $page = $subpage = $title_for_layout = null;
 
-        //pathの1個めに文字列が入っていたら
+//pathの1個めに文字列が入っていたら
         if (!empty($path[0])) {
-            //その文字列を代入する  aaa
+//その文字列を代入する  aaa
             $page = $path[0];
         }
-        // pathの2個めに文字列が入っていたら 例:bbb
+// pathの2個めに文字列が入っていたら 例:bbb
         if (!empty($path[1])) {
-            
-            //その文字列を変数subpageに代入
+
+//その文字列を変数subpageに代入
             $subpage = $path[1];
         }
-        //最後尾のpathが存在するなら
+//最後尾のpathが存在するなら
         if (!empty($path[$count - 1])) {
-            // bbb
+// bbb
             $title_for_layout = Inflector::humanize($path[$count - 1]);
         }
-        //$this->set(['page' => $page, 'subpage' => $subpage, 'title_for_layout' => $title_for_layout]);
+//$this->set(['page' => $page, 'subpage' => $subpage, 'title_for_layout' => $title_for_layout]);
         $this->set(compact('page', 'subpage', 'title_for_layout'));
 
         try {
@@ -90,11 +90,21 @@ class PagesController extends AppController {
     }
 
     public function top() {
-//        $this->set(['title' => $title]);
-//        $title = 'Loginbase Top';
+        $this->loadModel('Post');
+       $posts= $this->Post->find('all', [
+            'fields' => array('title', 'body'),
+//            'conditions' => array('Post.id' => 10),
+//            'order' => array('id' => 'asc'),
+//            'limit' => 1,
+//            'page' => n,
+//            'offset' => n,
+//            'callbacks' => true,
+//            'recursive' => 0,
+                ]
+        );
+       
+        
+   $this->set('posts', $posts);
     }
-    
-
-    
 
 }

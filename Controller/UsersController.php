@@ -15,7 +15,7 @@ class UsersController extends AppController {
      *
      * @var array
      */
-    public $components = array('Paginator', 'Session',
+    public $components = array('Paginator'
     );
 
     public function beforeFilter() {

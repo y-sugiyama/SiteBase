@@ -23,8 +23,8 @@
                 <li class="active"><a href="/">ホーム </a></li>
                 <li><a href="/pages/p1">このサイトについて</a></li>
                 <li><a href="/pages/p2">アクセス</a></li>
-                <li><a href="/posts/index">お知らせ</a></li>
-                <li><a href="/pages/contact">お問い合せ</a></li>
+                <li><a href="/pages/top/#news">お知らせ</a></li>
+                <li><?php echo $this->Html->link('お問い合せ', array('controller'=>'contact','action' => 'contact')); ?></li>
             </ul>
 
 
