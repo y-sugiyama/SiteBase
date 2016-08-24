@@ -92,7 +92,7 @@ class PagesController extends AppController {
     public function top() {
         $this->loadModel('Post');
        $posts= $this->Post->find('all', [
-            'fields' => array('title', 'body'),
+//            'fields' => array('title', 'body'),
 //            'conditions' => array('Post.id' => 10),
 //            'order' => array('id' => 'asc'),
 //            'limit' => 1,

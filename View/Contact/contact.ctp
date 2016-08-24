@@ -70,6 +70,15 @@ if ($this->Form->isFieldError('name')) {
 
 
 <?php
-echo $this->Form->end('submit',
-        ['class'=>'btn btn-default']
+
+$options = array(
+    'label' => '送信',
+    'div' => array(
+        'class' => 'btn btn-primary',
+        
+    )
 );
+
+echo $this->Form->end($options,[
+    'div' => 'false'
+]);

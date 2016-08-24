@@ -51,6 +51,9 @@ class ContactController extends AppController {
                 $this->Session->write('Contact', $this->request->data['Contact']);
                 $this->redirect(array('action' => 'confirm'));
             }
+
+
+
             $this->Flash->danger('入力内容に不備があります。');
         }
     }
@@ -67,14 +70,13 @@ class ContactController extends AppController {
                 //sessionを破棄する
                 $this->Session->delete('Contact');
             } else {
+                //再編集で戻ってきた時
+                $this->request->data = $this->Session->read('Contact');
+
                 $this->Flash->danger('エラーが発生しました。');
             }
         }
         $this->set('contact', $contact);
-        //もしsessionがあればrequest->dataにsetする
-        if(isset($contact)){
-            $this->set($this->request->data[$contact]);
-        }
     }
 
     public function finished() {

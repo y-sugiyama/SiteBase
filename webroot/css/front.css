@@ -66,9 +66,12 @@ and open the template in the editor.
     font-size: 40px;
 }
 
-.nav nav-pills nav-stacked{
+.panel panel-info{
+    width:80%;
 }
-
+.panel-title a {
+    display:block;
+}
 
 /*p1.ctp*/
 

@@ -24,7 +24,6 @@
 
         <!-- Latest compiled and minified JavaScript -->
 
-
 		<?php
     
 //              view側のctpファイルにmeta css scriptが書かれていれば適用します
