@@ -7,7 +7,7 @@ $this->start('topheader');
 ?>
 <div class="topbackground1">
     <!--    <div class="container">-->
-    <h1>Loginbase 静的ページ1</h1>
+    <h1>Sitebase 静的ページ1</h1>
     <p class="lead">ViewのPagesフォルダ配下にctpファイルを作成するだけで､フロントエンドのTopページから遷移する静的ページを作成できます</p>
     <!--</div>-->
 </div>

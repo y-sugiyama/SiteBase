@@ -32,7 +32,7 @@
 		echo $this->fetch('script');
 		?>
     </head>
-    <body>
+    <body class="<?php echo $this->fetch('body_class'); ?>">
         <?php echo $this->element('navbar_front'); ?>
 
 <!--        表示領域の幅全体に表示する-->

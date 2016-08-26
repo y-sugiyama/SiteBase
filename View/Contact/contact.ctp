@@ -66,11 +66,13 @@ if ($this->Form->isFieldError('name')) {
              'placeholder' => 'お問い合せ内容'
          ]);
          ?></div>
+             
+<button class="btn btn-lg btn-primary" type="submit">送信</button>
 
-
+<?php echo $this->Form->end(); ?>
 
 <?php
-
+/*
 $options = array(
     'label' => '送信',
     'div' => array(
@@ -82,3 +84,4 @@ $options = array(
 echo $this->Form->end($options,[
     'div' => 'false'
 ]);
+*/

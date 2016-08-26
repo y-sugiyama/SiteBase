@@ -18,6 +18,29 @@ $this->start('topheader');
 <?php
 $this->end();
 ?>
+
+<!--お知らせ-->
+<div class="panel-group" id="accordion">
+    <h3>お知らせ</h3>
+    <div class="panel panel-info" id="newstop">
+        <?php foreach ($posts as $post): ?>
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        <?php echo h($post['Post']['title']); ?> 
+                    </a>
+                </h4>
+                <h6><?php echo h($post['Post']['created']); ?> </h6>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <?php echo h($post['Post']['body']) ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <h5><?php echo $this->Html->link('もっと見る>>', array('controller'=>'pages','action' => 'news')); ?></h5>
+
 <!-- Example row of columns -->
 <div class="row">
     <div class="col-lg-4" >
@@ -59,52 +82,8 @@ $this->end();
 </div>
 
 
-<!--
-<div class="panel panel-info" id="news">
-   Default panel contents 
-  <div class="panel-heading">お知らせ</div>
-
-   Table 
-  <table class="table">
-      <tr>
-          <th>タイトル</th>
-          <th>内容</th>
-          <th>作成日</th>
-      </tr>
-      <tr>
-<?php // foreach ($posts as $post): ?>
-          
-      <td> <?php // echo h($post['Post']['title']);      ?> 
-               </td>          
-      <td><?php // echo h($post['Post']['body'])      ?></td>
-      <td><?php // echo h($post['Post']['created'])      ?></td>
-      </tr>
-<?php // endforeach; ?>
-  </table>
-</div>-->
-<div class="panel-group" id="accordion">
-    <h3>お知らせ</h3>
-    <?php foreach ($posts as $post): ?>
-        <!--アコーディオンブロック-->
-        <!--アコーディオン要素-->
-        <div class="panel panel-info" id="news">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                        <?php echo h($post['Post']['title']); ?> 
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse in">
-                <div class="panel-body">
-                    <?php echo h($post['Post']['body']) ?>
-                </div>
-            </div>
-        </div>
-    <?php endforeach; ?>
 </div>
-<!--/アコーディオン要素-->
-<!--アコーディオン要素-->
+
 
 <!-- Site footer -->
 <footer class="footer">

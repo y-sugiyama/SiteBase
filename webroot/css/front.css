@@ -10,6 +10,11 @@ and open the template in the editor.
 
 /*top.ctp*/
 
+body{
+    font-family:Avenir , "Open Sans" , "Helvetica Neue" , Helvetica , Arial , Verdana , Roboto , "游ゴシック" , "Yu Gothic" , "游ゴシック体" , "YuGothic" , "ヒラギノ角ゴ Pro W3" , "Hiragino Kaku Gothic Pro" , "Meiryo UI" , "メイリオ" , Meiryo , "ＭＳ Ｐゴシック" , "MS PGothic" , sans-serif;
+
+}
+
 .topimage {
     /*webroot/css配下のどこか､という記述になる*/
       background: url("/img/topimage.jpg");
@@ -70,9 +75,19 @@ and open the template in the editor.
     width:80%;
 }
 .panel-title a {
-    display:block;
+/*    display:block;*/
 }
 
+.panel-heading h4{
+display: inline;
+}
+
+.panel-heading h6{
+display: inline;
+float: right;
+margin-top:4px; 
+
+}
 /*p1.ctp*/
 
 
@@ -87,11 +102,19 @@ padding-right: 0;
     padding: 70px 70px 20px 20px  ; 
     margin: 0 auto;
     height:350px;
-    background-color: skyblue;
+    /*background-color: skyblue;*/
+        background: url("/img/block.jpg");
+      background-position: center center;
+      /*画像を画面に合わせて最小サイズで表示*/
+      background-size: contain;
+       
     color: #ffffff;
+    
+}
+
 /*    position: absolute; left: 0;
     position: absolute; right: 0;*/
-}
+
 
 .media{
     padding: 20px 20px 20px 10px  ; 
@@ -111,3 +134,31 @@ padding-top: 5px;
 }
 /*p2.ctp*/
 
+/*view.ctp*/
+.thumbnail{
+      padding: 20px 20px 20px 10px  ; 
+}
+
+.glyphicon-info-sign{
+    font-size: 40px;
+}
+
+#news{
+    /*背景色を透明に*/
+    background-color:  transparent;
+    margin-top: 10px;
+    
+}
+
+#news h3{
+    text-align: center;
+}
+#news h6{
+    text-align: center;
+    background-color: pink;
+}
+
+.thumbnail{
+    padding-top:10px;
+    height: 200px;
+}

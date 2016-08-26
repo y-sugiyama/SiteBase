@@ -40,43 +40,56 @@ class ContactController extends AppController {
     }
 
     public function contact() {
+        
+        //再編集で戻ってきたとき(getできた時)
+        //Sessionを読み込んで変数contactにいれる
+        $contact = $this->Session->read('Contact');
+        //変数contactがNULLでなければ
+        if($contact!==NULL){
+            //変数contactの値をフォームに代入する
+            $this->request->data['Contact'] = $contact;
+        }
 
+        //postでフォームが送信されたら
         if ($this->request->is('post')) {
-
+            
+            //フォームに入力された値をセットして
             $this->Contact->set($this->request->data);
 
             //フォームから受け取ったデータをバリデーション
             if ($this->Contact->validates()) {
-
+                  
+                //検証がOkならSessionへフォームに入力されたデータを書き込む
                 $this->Session->write('Contact', $this->request->data['Contact']);
                 $this->redirect(array('action' => 'confirm'));
             }
-
-
-
             $this->Flash->danger('入力内容に不備があります。');
         }
     }
 
     public function confirm() {
-
+          
+        //Sessionを読み込んで変数contactにいれる(getできた時)
         $contact = $this->Session->read('Contact');
+        //getできたら値を$contactにセットする
+        $this->set('contact', $contact);
+      
 
         if ($this->request->is('post')) {
             //Sessionを渡す
             if ($this->sendContact($contact)) {
                 $this->Flash->success('お問い合わせを受け付けました。');
-                $this->redirect('/contact/finished');
-                //sessionを破棄する
+                    //sessionを破棄する
                 $this->Session->delete('Contact');
+                //それからリダイレクトする
+                $this->redirect(array('action' => 'finished'));
+            
             } else {
-                //再編集で戻ってきた時
-                $this->request->data = $this->Session->read('Contact');
-
+               
                 $this->Flash->danger('エラーが発生しました。');
             }
         }
-        $this->set('contact', $contact);
+        
     }
 
     public function finished() {

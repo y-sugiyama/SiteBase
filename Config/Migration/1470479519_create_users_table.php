@@ -45,36 +45,34 @@ class CreateUsersTable extends CakeMigration {
                     'created' => array(
                         'type' => 'datetime'
                     ),
-                     'modified' => array(
+                    'modified' => array(
                         'type' => 'datetime'
                     ),
                 ),
             ),
-            'create_table' => array(
-                'posts' => array(
-                    'id' => array(
-                        'type' => 'integer',
-                        'null' => false,
-                        'default' => null,
-                        'length' => 36,
-                        'key' => 'primary',
-                    ),
-                    'title' => array(
-                        'type' => 'string',
-                        'null' => false,
-                        'default' => null
-                    ),
-                    'body' => array(
-                        'type' => 'text',
-                        'null' => false,
-                        'default' => null
-                    ),
-                    'created' => array(
-                        'type' => 'datetime'
-                    ),
-                     'modified' => array(
-                        'type' => 'datetime'
-                    ),
+            'posts' => array(
+                'id' => array(
+                    'type' => 'integer',
+                    'null' => false,
+                    'default' => null,
+                    'length' => 36,
+                    'key' => 'primary',
+                ),
+                'title' => array(
+                    'type' => 'string',
+                    'null' => false,
+                    'default' => null
+                ),
+                'body' => array(
+                    'type' => 'text',
+                    'null' => false,
+                    'default' => null
+                ),
+                'created' => array(
+                    'type' => 'datetime'
+                ),
+                'modified' => array(
+                    'type' => 'datetime'
                 ),
             ),
         ),

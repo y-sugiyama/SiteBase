@@ -91,20 +91,26 @@ class PagesController extends AppController {
 
     public function top() {
         $this->loadModel('Post');
-       $posts= $this->Post->find('all', [
+        $posts = $this->Post->find('all', [
 //            'fields' => array('title', 'body'),
 //            'conditions' => array('Post.id' => 10),
-//            'order' => array('id' => 'asc'),
-//            'limit' => 1,
+           'order' => array('id' => 'asc'),
+           'limit' => 2,
 //            'page' => n,
 //            'offset' => n,
 //            'callbacks' => true,
 //            'recursive' => 0,
                 ]
         );
-       
-        
-   $this->set('posts', $posts);
+        $this->set('posts', $posts);
+    }
+
+    public function news() {
+        $this->loadModel('Post');
+        $posts = $this->Post->find('all', [
+                ]
+        );
+        $this->set('posts', $posts);
     }
 
 }
