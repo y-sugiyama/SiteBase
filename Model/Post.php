@@ -38,5 +38,13 @@ class Post extends AppModel {
      * @var string
      */
     public $displayField = 'title';
+    
+    public function getRecent() {
+        $conditions = [
+            'order' => ['Post.created' => 'Post. DESC'],
+        ];
+        return $this->find('all', compact('conditions'));
+    }
+
 
 }

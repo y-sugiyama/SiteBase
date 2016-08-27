@@ -47,6 +47,7 @@ class PostsController extends AppController {
     public function index() {
         $this->Post->recursive = 0;
         $this->set('posts', $this->Paginator->paginate());
+        $post = $this->Post->getRecent();
     }
 
     /**

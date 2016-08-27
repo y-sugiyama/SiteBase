@@ -94,7 +94,7 @@ class PagesController extends AppController {
         $posts = $this->Post->find('all', [
 //            'fields' => array('title', 'body'),
 //            'conditions' => array('Post.id' => 10),
-           'order' => array('id' => 'asc'),
+           'order' => array('created' => 'desc'),
            'limit' => 2,
 //            'page' => n,
 //            'offset' => n,

@@ -1,5 +1,5 @@
 {
-    "name": "loginbase-app",
+    "name": "Sitebase-app",
     "require": {
         "cakephp/cakephp": "2.8.*",
         "cakedc/migrations": "~2.4.0",
