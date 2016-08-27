@@ -167,3 +167,18 @@ padding-top: 5px;
       margin-top: 20px;
       
 }
+
+
+
+.panel panel-default{
+    margin-top: 10px;
+}
+
+#login.panel-heading{
+    padding: 10px 10px;
+    
+    
+}
+#login.panel-heading h4{
+
+}
