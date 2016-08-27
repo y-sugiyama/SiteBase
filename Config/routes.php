@@ -21,7 +21,8 @@ Router::connect('/', array('controller' => 'pages', 'action' => 'top'));
  * ...and connect the rest of 'Pages' controller's URLs.
  */ 
 Router::connect('/pages/top', array('controller' => 'pages', 'action' => 'top'));
-Router::connect('/pages/view', array('controller' => 'pages', 'action' => 'news'));
+//Router::connect('/pages/news', array('controller' => 'pages', 'action' => 'news'));
+Router::connect('/pages/news/*', array('controller' => 'pages', 'action' => 'news'));
 
 Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 

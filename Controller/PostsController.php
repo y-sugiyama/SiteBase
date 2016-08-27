@@ -44,10 +44,19 @@ class PostsController extends AppController {
      *
      * @return void
      */
+      public $paginate = array(
+//        'limit' => 6,
+//        'contain' => array('Post')
+    );
+    
+    
     public function index() {
         $this->Post->recursive = 0;
-        $this->set('posts', $this->Paginator->paginate());
-        $post = $this->Post->getRecent();
+//        $this->set('posts', $this->Paginator->paginate());
+
+        $this->paginate = $this->Post->getRecent(); // paginateプロパティ　
+        $posts = $this->paginate('Post'); // こっちはpaginateメソッド
+        $this->set('posts' , $posts);
     }
 
     /**

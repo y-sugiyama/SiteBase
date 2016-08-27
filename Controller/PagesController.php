@@ -28,6 +28,9 @@ class PagesController extends AppController {
      * @var array
      */
     public $uses = array();
+    
+    public $components = array('Paginator', 'Flash');
+
 
     /**
      * Displays a view
@@ -48,6 +51,7 @@ class PagesController extends AppController {
     }
 
     public function display() {
+       
         $path = func_get_args();
 
 
@@ -88,29 +92,49 @@ class PagesController extends AppController {
             throw new NotFoundException();
         }
     }
+    
+     public $paginate = array(
+//        'limit' => 6,
+//        'contain' => array('Post')
+    );
 
     public function top() {
         $this->loadModel('Post');
-        $posts = $this->Post->find('all', [
-//            'fields' => array('title', 'body'),
-//            'conditions' => array('Post.id' => 10),
-           'order' => array('created' => 'desc'),
-           'limit' => 2,
+      $this->Paginator->settings = $this->paginate;
+    $posts = $this->Paginator->paginate('Post');          
+        $this->set('posts' , $posts);
+//        $posts = $this->Post->find('all', [
+////            'fields' => array('title', 'body'),
+////            'conditions' => array('Post.id' => 10),
+//           'order' => array('created' => 'desc'),
+           
 //            'page' => n,
 //            'offset' => n,
 //            'callbacks' => true,
 //            'recursive' => 0,
-                ]
-        );
-        $this->set('posts', $posts);
+           
+        
+      
     }
 
     public function news() {
-        $this->loadModel('Post');
-        $posts = $this->Post->find('all', [
-                ]
-        );
-        $this->set('posts', $posts);
+         $this->loadModel('Post');
+      $this->Paginator->settings = $this->Post->getRecent(6);
+    $posts = $this->Paginator->paginate('Post');          
+    
+    
+    $this->set('posts' , $posts);
+       
+//        $this->loadModel('Post');
+//        $this->Paginator->settings = $this->paginate;
+//        $this->paginate = $this->Post->getRecent(6); 
+//        $posts = $this->Paginator->paginate('Post');
+//       //$this->paginate = $this->Post->getRecent(6); // paginateプロパティ　
+//        //$posts = $this->paginate('Post'); // こっちはpaginateメソッド
+//        $this->set('posts' , $posts);
+        
+        
+        
     }
 
 }

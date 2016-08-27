@@ -20,7 +20,7 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">ホーム </a></li>
+                <li><a href="/">ホーム </a></li>
                 <li><a href="/pages/p1">このサイトについて</a></li>
                 <li><a href="/pages/p2">アクセス</a></li>
                 <li><?php echo $this->Html->link('お知らせ', array('controller'=>'pages','action' => 'news')); ?></li>

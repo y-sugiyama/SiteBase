@@ -38,13 +38,22 @@ class Post extends AppModel {
      * @var string
      */
     public $displayField = 'title';
-    
-    public function getRecent() {
-        $conditions = [
-            'order' => ['Post.created' => 'Post. DESC'],
-        ];
-        return $this->find('all', compact('conditions'));
-    }
 
+    //getRecentメソッドは$optionを返します
+    public function getRecent($limit=null) {
+
+        $option = array(
+            
+            'order' => array('created' => 'desc'),
+            
+            );
+        
+         if($limit!==null){
+                $option['limit'] = $limit;
+           
+            }
+         
+        return $option;
+    }
 
 }

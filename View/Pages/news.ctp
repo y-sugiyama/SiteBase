@@ -33,3 +33,7 @@ $this->end();
         </div>
           <?php endforeach; ?>
     </div>
+
+    <?php echo $this->Paginator->prev(); ?>               
+ <?php echo $this->Paginator->numbers(); ?>
+<?php echo $this->Paginator->next(); ?>

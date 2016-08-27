@@ -54,6 +54,7 @@
 <?php endforeach; ?>
 
                 </table>
+            
 
             </div>
 
