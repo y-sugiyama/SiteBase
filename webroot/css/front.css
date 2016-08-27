@@ -34,7 +34,7 @@ body{
         padding: 15px 15px;
         margin-left: auto;
         margin-right: auto;
-        width: 1210px;
+        width: 100%;
         height:150px;
         /*左寄せする要素を、親要素を基準left:0の絶対位置に配置する。*/
         position: absolute; left: 0
@@ -161,4 +161,9 @@ padding-top: 5px;
 .thumbnail{
     padding-top:10px;
     height: 200px;
+}
+
+#contact.row{
+      margin-top: 20px;
+      
 }

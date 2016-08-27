@@ -18,7 +18,7 @@
                 <h2><?php echo 'ユーザ一覧'; ?></h2>
 
                 <?php if ($login_user['role'] === 'admin') : ?>
-                    <p><button class="btn btn-default" role="button"><?php echo $this->Html->link('新規追加', array('controller' => 'users', 'action' => 'add')); ?></button></p>
+                    <p><?php echo $this->Html->link('新規追加', array('controller' => 'users', 'action' => 'add'),['class' => 'btn btn-default']); ?></p>
                 <?php endif; ?>
 
                 <?php echo $this->fetch('content'); ?>
@@ -36,13 +36,19 @@
                             <td><?php echo h($user['User']['role']); ?>&nbsp;</td>
                             <td class="actions">
                                 <?php if ($login_user['role'] === 'admin') : ?>
-                                    <button type="button" class="btn btn-default"><?php echo $this->Html->link('編集', array('action' => 'edit', $user['User']['id'])); ?></button>
-                                    <button type="button" class="btn btn-danger"><?php echo $this->Form->postLink(__('削除'), array('action' => 'delete', $user['User']['id']), array('confirm' => '本当に削除してよろしいですか?', $user['User']['id'])); ?></button>
+
+                                    <?php
+                                    echo $this->Html->link('編集', array('action' => 'edit', $user['User']['id']), ['class' => 'btn btn-default']);
+                                    ?>
+
+                                    <?php
+                                    echo $this->Form->postLink(__('削除'), ['action' => 'delete', $user['User']['id']], ['class' => 'btn btn-danger']);
+                                    ?>
                                 <?php endif; ?>
-                                    
+
                                 <?php if ($login_user['role'] === 'user') : ?>
-                                <?php echo '実行できるアクションはありません'; ?>
-                                <?php endif;?>
+                                    <?php echo '実行できるアクションはありません'; ?>
+                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
