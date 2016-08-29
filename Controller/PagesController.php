@@ -22,119 +22,112 @@ App::uses('BaseAuthorize', 'Controller/Component/Auth');
  */
 class PagesController extends AppController {
 
-    /**
-     * This controller does not use a model
-     *
-     * @var array
-     */
-    public $uses = array();
-    
-    public $components = array('Paginator', 'Flash');
+	/**
+	 * This controller does not use a model
+	 *
+	 * @var array
+	 */
+	public $uses = array();
 
+	public $components = array('Paginator', 'Flash');
 
-    /**
-     * Displays a view
-     *
-     * @return void
-     * @throws NotFoundException When the view file could not be found
-     *   or MissingViewException in debug mode.
-     */
-    public function beforeFilter() {
-        parent::beforeFilter();
-        $this->Auth->allow();
-    }
+	/**
+	 * Displays a view
+	 *
+	 * @return void
+	 * @throws NotFoundException When the view file could not be found
+	 *   or MissingViewException in debug mode.
+	 */
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow();
+	}
 
-    public function beforeRender() {
-        parent::beforeRender();
-//このアクションではfront.ctpのレイアウトを使います
-        $this->layout = 'front';
-    }
+	public function beforeRender() {
+		parent::beforeRender();
+		//このアクションではfront.ctpのレイアウトを使います
+		$this->layout = 'front';
+	}
 
-    public function display() {
-       
-        $path = func_get_args();
+	public function display() {
 
+		$path = func_get_args();
 
-//パスの数を数える (スラッシュで区切られた)
-        $count = count($path);
-        if (!$count) {
-//何も書かれてなければrootに飛ぶ
-            return $this->redirect('/');
-        }
-//変数の初期化
-        $page = $subpage = $title_for_layout = null;
+		//パスの数を数える (スラッシュで区切られた)
+		$count = count($path);
+		if (!$count) {
+			//何も書かれてなければrootに飛ぶ
+			return $this->redirect('/');
+		}
+		//変数の初期化
+		$page = $subpage = $title_for_layout = null;
 
-//pathの1個めに文字列が入っていたら
-        if (!empty($path[0])) {
-//その文字列を代入する  aaa
-            $page = $path[0];
-        }
-// pathの2個めに文字列が入っていたら 例:bbb
-        if (!empty($path[1])) {
+		//pathの1個めに文字列が入っていたら
+		if (!empty($path[0])) {
+			//その文字列を代入する  aaa
+			$page = $path[0];
+		}
+		// pathの2個めに文字列が入っていたら 例:bbb
+		if (!empty($path[1])) {
 
-//その文字列を変数subpageに代入
-            $subpage = $path[1];
-        }
-//最後尾のpathが存在するなら
-        if (!empty($path[$count - 1])) {
-// bbb
-            $title_for_layout = Inflector::humanize($path[$count - 1]);
-        }
-//$this->set(['page' => $page, 'subpage' => $subpage, 'title_for_layout' => $title_for_layout]);
-        $this->set(compact('page', 'subpage', 'title_for_layout'));
+			//その文字列を変数subpageに代入
+			$subpage = $path[1];
+		}
+		//最後尾のpathが存在するなら
+		if (!empty($path[$count-1])) {
+			// bbb
+			$title_for_layout = Inflector::humanize($path[$count-1]);
+		}
+		//$this->set(['page' => $page, 'subpage' => $subpage, 'title_for_layout' => $title_for_layout]);
+		$this->set(compact('page', 'subpage', 'title_for_layout'));
 
-        try {
-            $this->render(implode('/', $path));
-        } catch (MissingViewException $e) {
-            if (Configure::read('debug')) {
-                throw $e;
-            }
-            throw new NotFoundException();
-        }
-    }
-    
-     public $paginate = array(
-//        'limit' => 6,
-//        'contain' => array('Post')
-    );
+		try {
+			$this->render(implode('/', $path));
+		} catch (MissingViewException $e) {
+			if (Configure::read('debug')) {
+				throw $e;
+			}
+			throw new NotFoundException();
+		}
+	}
 
-    public function top() {
-        $this->loadModel('Post');
-      $this->Paginator->settings = $this->paginate;
-    $posts = $this->Paginator->paginate('Post');          
-        $this->set('posts' , $posts);
-//        $posts = $this->Post->find('all', [
-////            'fields' => array('title', 'body'),
-////            'conditions' => array('Post.id' => 10),
-//           'order' => array('created' => 'desc'),
-           
-//            'page' => n,
-//            'offset' => n,
-//            'callbacks' => true,
-//            'recursive' => 0,
-           
-        
-      
-    }
+	public $paginate = array(
+		//        'limit' => 6,
+		//        'contain' => array('Post')
+	);
 
-    public function news() {
-         $this->loadModel('Post');
-      $this->Paginator->settings = $this->Post->getRecent(6);
-    $posts = $this->Paginator->paginate('Post');          
-    
-    
-    $this->set('posts' , $posts);
-       
-//        $this->loadModel('Post');
-//        $this->Paginator->settings = $this->paginate;
-//        $this->paginate = $this->Post->getRecent(6); 
-//        $posts = $this->Paginator->paginate('Post');
-//       //$this->paginate = $this->Post->getRecent(6); // paginateプロパティ　
-//        //$posts = $this->paginate('Post'); // こっちはpaginateメソッド
-//        $this->set('posts' , $posts);
-        
-        
-        
-    }
+	public function top() {
+		$this->loadModel('Post');
+		$this->Paginator->settings = $this->Post->getRecent(2);
+		$posts                     = $this->Paginator->paginate('Post');
+		$this->set('posts', $posts);
+		//        $posts = $this->Post->find('all', [
+		////            'fields' => array('title', 'body'),
+		////            'conditions' => array('Post.id' => 10),
+		//           'order' => array('created' => 'desc'),
+
+		//            'page' => n,
+		//            'offset' => n,
+		//            'callbacks' => true,
+		//            'recursive' => 0,
+
+	}
+
+	public function news() {
+		$this->loadModel('Post');
+		$this->Paginator->settings = $this->Post->getRecent(6);
+		$posts                     = $this->Paginator->paginate('Post');
+
+		$this->set('posts', $posts);
+
+		//        $this->loadModel('Post');
+		//        $this->Paginator->settings = $this->paginate;
+		//        $this->paginate = $this->Post->getRecent(6);
+		//        $posts = $this->Paginator->paginate('Post');
+		//       //$this->paginate = $this->Post->getRecent(6); // paginateプロパティ　
+		//        //$posts = $this->paginate('Post'); // こっちはpaginateメソッド
+		//        $this->set('posts' , $posts);
+
+	}
 
 }
