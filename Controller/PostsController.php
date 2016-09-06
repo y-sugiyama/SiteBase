@@ -14,140 +14,143 @@ App::uses('AppController', 'Controller');
  */
 class PostsController extends AppController {
 
-    /**
-     * Components
-     *
-     * @var array
-     */
-    public $components = array('Paginator', 'Session', 'Flash');
+	/**
+	 * Components
+	 *
+	 * @var array
+	 */
+	public $components = array('Paginator', 'Session', 'Flash');
 
-    public function beforeFilter() {
-        parent::beforeFilter();
-    }
+	public function beforeFilter() {
+		parent::beforeFilter();
+	}
 
-    public function isAuthorized($user) {
-        // action配列の中に以下のアクションが含まれていたら
-        if (in_array($this->action, ['index', 'view', 'add', 'delete'])) {
-//            trueを返す(roleがadminでもuserでもそのactionにアクセスできる)
-            return true;
-        }
-        //それ以外のactionの場合は､管理者adminだけがアクセスできる
-        if ($user['role'] === 'admin') {
-            return true;
-        }
+	public function isAuthorized($user) {
+		// action配列の中に以下のアクションが含まれていたら
+		if (in_array($this->action, ['index', 'view', 'add', 'delete'])) {
+			//            trueを返す(roleがadminでもuserでもそのactionにアクセスできる)
+			return true;
+		}
+		//それ以外のactionの場合は､管理者adminだけがアクセスできる
+		if ($user['role'] === 'admin') {
+			return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    /**
-     * index method
-     *
-     * @return void
-     */
-      public $paginate = array(
-//        'limit' => 6,
-//        'contain' => array('Post')
-    );
-    
-    
-    public function index() {
-        $this->Post->recursive = 0;
-//        $this->set('posts', $this->Paginator->paginate());
+	/**
+	 * index method
+	 *
+	 * @return void
+	 */
+	public $paginate = array(
+		//        'limit' => 6,
+		//        'contain' => array('Post')
+	);
 
-        $this->paginate = $this->Post->getRecent(); // paginateプロパティ　
-        $posts = $this->paginate('Post'); // こっちはpaginateメソッド
-        $this->set('posts' , $posts);
-    }
+	public function index() {
+		$this->Post->recursive = 0;
+		//        $this->set('posts', $this->Paginator->paginate());
 
-    /**
-     * view method
-     *
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
-     */
-    public function view($id = null) {
-        if (!$this->Post->exists($id)) {
-            throw new NotFoundException(__('Invalid post'));
-        }
-        $options = array('conditions' => array('Post.' . $this->Post->primaryKey => $id));
-        $this->set('post', $this->Post->find('first', $options));
-    }
+		// $this->paginate = $this->Post->getRecent();// paginateプロパティ　
+		// $posts          = $this->paginate('Post');// こっちはpaginateメソッド
+		// $this->set('posts', $posts);
+		$this->Paginator->settings = $this->Post->getRecent();
+		$posts                     = $this->Paginator->paginate('Post');
+		$this->set('posts', $posts);
+	}
 
-    /**
-     * add method
-     *
-     * @return void
-     */
-    public function add() {
-        //フォームが送信されたら
-        if ($this->request->is('post')) {
-            //空にして
-            $this->Post->create();
+	/**
+	 * view method
+	 *
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
+	public function view($id = null) {
+		if (!$this->Post->exists($id)) {
+			throw new NotFoundException(__('Invalid post'));
+		}
+		$options = array('conditions' => array('Post.'.$this->Post->primaryKey => $id)
+		);
+		$this->set('post', $this->Post->find('first', $options));
+	}
 
-            //正しくデータが保存されたら
-            if ($this->Post->save($this->request->data)) {
-                $this->Flash->success('お知らせが新規追加されました.');
-                return $this->redirect(array('action' => 'index'));
-            } else {
-                //正しくデータが保存されなかったら
-            }
-            $this->Flash->danger('お知らせが正常に保存されませんでした､再度追加をしてください.');
-        }
-    }
+	/**
+	 * add method
+	 *
+	 * @return void
+	 */
+	public function add() {
+		//フォームが送信されたら
+		if ($this->request->is('post')) {
+			//空にして
+			$this->Post->create();
 
-    /**
-     * edit method
-     *
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
-     */
-    public function edit($id = null) {
+			//正しくデータが保存されたら
+			if ($this->Post->save($this->request->data)) {
+				$this->Flash->success('お知らせが新規追加されました.');
+				return $this->redirect(array('action' => 'index'));
+			} else {
+				//正しくデータが保存されなかったら
+			}
+			$this->Flash->danger('お知らせが正常に保存されませんでした､再度追加をしてください.');
+		}
+	}
 
-        //PostモデルのDBにそのidが存在しなかったら
-        if (!$this->Post->exists($id)) {
-            throw new NotFoundException(__('Invalid post'));
-        }
-        //PostモデルのDBにそのidが存在して
-        //フォームがpostかputで送信されて
-        if ($this->request->is(array('post', 'put'))) {
-            //$idをidに代入します
-            $this->Post->id = $id;
+	/**
+	 * edit method
+	 *
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
+	public function edit($id = null) {
 
-            //フォームからの送信データがDBに保存されたら
-            if ($this->Post->save($this->request->data)) {
-                $this->Flash->success('編集内容は正常に保存されました');
-                return $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Flash->danger('編集内容は保存されませんでした｡再度編集しなおしてください');
-            }
-            //GETで来たときは
-        } else {
-            $options = array('conditions' => array('Post.' . $this->Post->primaryKey => $id));
-            $this->request->data = $this->Post->find('first', $options);
-        }
-    }
+		//PostモデルのDBにそのidが存在しなかったら
+		if (!$this->Post->exists($id)) {
+			throw new NotFoundException(__('Invalid post'));
+		}
+		//PostモデルのDBにそのidが存在して
+		//フォームがpostかputで送信されて
+		if ($this->request->is(array('post', 'put'))) {
+			//$idをidに代入します
+			$this->Post->id = $id;
 
-    /**
-     * delete method
-     *
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
-     */
-    public function delete($id = null) {
-        $this->Post->id = $id;
-        if (!$this->Post->exists()) {
-            throw new NotFoundException(__('Invalid post'));
-        }
-        $this->request->allowMethod('post', 'delete');
-        if ($this->Post->delete()) {
-            $this->Flash->success('お知らせが削除されました｡');
-        } else {
-            $this->Flash->danger(__('お知らせは削除されませんでした｡もう一度実行してください｡'));
-        }
-        return $this->redirect(array('action' => 'index'));
-    }
+			//フォームからの送信データがDBに保存されたら
+			if ($this->Post->save($this->request->data)) {
+				$this->Flash->success('編集内容は正常に保存されました');
+				return $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Flash->danger('編集内容は保存されませんでした｡再度編集しなおしてください');
+			}
+			//GETで来たときは
+		} else {
+			$options             = array('conditions' => array('Post.'.$this->Post->primaryKey => $id));
+			$this->request->data = $this->Post->find('first', $options);
+		}
+	}
+
+	/**
+	 * delete method
+	 *
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
+	public function delete($id = null) {
+		$this->Post->id = $id;
+		if (!$this->Post->exists()) {
+			throw new NotFoundException(__('Invalid post'));
+		}
+		$this->request->allowMethod('post', 'delete');
+		if ($this->Post->delete()) {
+			$this->Flash->success('お知らせが削除されました｡');
+		} else {
+			$this->Flash->danger(__('お知らせは削除されませんでした｡もう一度実行してください｡'));
+		}
+		return $this->redirect(array('action' => 'index'));
+	}
 
 }
